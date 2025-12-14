@@ -5,7 +5,8 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformResponseInterceptor } from './interceptors/transform-response/transform-response.interceptor';
 import { LoggerService } from './logger/logger.service';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
-import { DatabaseService } from 'src/database/database.service';
+import { DatabaseService } from '../database/database.service';
+import { CacheService } from './cache/cache.service';
 
 @Global()
 @Module({
@@ -23,8 +24,9 @@ import { DatabaseService } from 'src/database/database.service';
     },
     LoggerService,
     DatabaseService,
+    CacheService,
   ],
-  exports: [LoggerService, DatabaseService],
+  exports: [LoggerService, DatabaseService, CacheService],
 })
 export class CoreModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
