@@ -1,0 +1,31 @@
+services:
+  nestjs_starter_postgres: # needs updating
+    image: postgres:latest
+    container_name: nestjs_starter_postgres # needs updating
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - nestjs_starter_postgres_data:/var/lib/postgresql # needs updating
+  nestjs_starter_redis:
+    image: redis:latest
+    container_name: nestjs_starter_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - nestjs_starter_redis_data:/data
+
+networks:
+  nestjs_starter_network: # needs updating
+    driver: bridge
+
+volumes:
+  nestjs_starter_postgres_data: # needs updating
+    driver: local
+  nestjs_starter_redis_data: # needs updating
+    driver: local
