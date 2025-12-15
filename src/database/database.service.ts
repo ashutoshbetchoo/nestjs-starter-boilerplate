@@ -3,6 +3,7 @@ import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as schema from './schema';
 import { ConfigService } from '@nestjs/config';
 import { Pool } from 'pg';
+import { reset } from 'drizzle-seed';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
@@ -27,5 +28,9 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
 
   async onModuleDestroy() {
     await this.pool?.end();
+  }
+
+  async resetDatabase() {
+    await reset(this.db, schema);
   }
 }

@@ -13,6 +13,8 @@ services:
       - "5432:5432"
     volumes:
       - nestjs_starter_postgres_data:/var/lib/postgresql # needs updating
+    networks:
+      - nestjs_starter_network
   nestjs_starter_redis:
     image: redis:latest
     container_name: nestjs_starter_redis
@@ -20,6 +22,8 @@ services:
       - "6379:6379"
     volumes:
       - nestjs_starter_redis_data:/data
+    networks:
+      - nestjs_starter_network
 
 networks:
   nestjs_starter_network: # needs updating
